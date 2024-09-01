@@ -1,3 +1,4 @@
+import { appWindow } from "@tauri-apps/api/window";
 import kaplay from "kaplay";
 
 const k = kaplay({
@@ -18,3 +19,13 @@ k.loadSprite("clouds", "./clouds.png");
 k.loadSound("jump", "./jump.wav");
 k.loadSound("hurt", "./hurt.wav");
 k.loadSound("confirm", "./confirm.wav");
+
+addEventListener("keydown", async (key) => {
+  if (key.code === "F11") {
+    if (await appWindow.isFullscreen()) {
+      await appWindow.setFullscreen(false);
+      return;
+    }
+    appWindow.setFullscreen(true);
+  }
+});
